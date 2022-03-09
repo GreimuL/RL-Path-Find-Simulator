@@ -8,8 +8,8 @@ public class Slime : MonoBehaviour
     public enum ActionType { LEFT, UP, RIGHT, DOWN, CENTER = -1 };
 
     private float[,,] actionValueTable;
-    private bool[,] gridStat;
-    public GridMap gridMap;
+    public GridMapManager gridMapMgr;
+    private GridMap gridMap;
     float eps;
     int actionNumber;
     int reward;
@@ -18,18 +18,26 @@ public class Slime : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gridStat = gridMap.GetGridStat();
         actionNumber = 4;
         reward = -1;
         alpha = 0.1f;
         eps = 0.9f;
-        actionValueTable = new float[gridMap.GetSize(),gridMap.GetSize(),actionNumber];
+    }
+
+    public void ActionTableInit()
+    {
+        gridMap = gridMapMgr.GetGridMap();
+        actionValueTable = new float[gridMap.GetSize().Item1, gridMap.GetSize().Item2, actionNumber];
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float verticalVector = Input.GetAxis("Vertical");
+        float horizontalVector = Input.GetAxis("Horizontal");
+
+        Vector3 direction = Vector3.forward * verticalVector + Vector3.right * horizontalVector;
+        //transform.rotation = Quaternion.LookRotation(direction);
     }
 
     ActionType ActionDecision(int currentPositionX, int currentPositionY)
@@ -56,4 +64,6 @@ public class Slime : MonoBehaviour
         float currentSelectedActionValue = actionValueTable[currentPositionX, currentPositionY, (int)selectedAction];
         actionValueTable[currentPositionX, currentPositionY, (int)selectedAction] += (reward + maxActionValue - currentSelectedActionValue) * alpha;
     }
+
+
 }
