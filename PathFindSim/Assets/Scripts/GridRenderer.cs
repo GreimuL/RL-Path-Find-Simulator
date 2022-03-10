@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using ActionType = Slime.ActionType;
 
 public class GridRenderer : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class GridRenderer : MonoBehaviour
                 {
                     GameObject tempPlane = Instantiate(plane, new Vector3(i * GlobalConstants.worldRatio, 1, j * GlobalConstants.worldRatio), new Quaternion(), this.transform);
                     planeArray[i, j] = tempPlane.GetComponent<ValuePlane>();
+                    planeArray[i, j].SetPlaneDirection(ActionType.CENTER);
                 }
             }
         }
@@ -65,9 +67,14 @@ public class GridRenderer : MonoBehaviour
                 {
                     continue;
                 }
-                planeArray[i, j].SetPlaneValue(actionValueTable[i, j]);
+                //planeArray[i, j].SetPlaneValue(actionValueTable[i, j]);
             }
         }
+    }
+
+    public void UpdateGridDirection(int i,int j, ActionType action)
+    {
+        planeArray[i, j].SetPlaneDirection(action);
     }
 
 }

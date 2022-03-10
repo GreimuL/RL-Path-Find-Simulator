@@ -87,7 +87,7 @@ public class GridMap
         return new System.Tuple<int,int>(sizeX,sizeY);
     }
 
-    void MoveSlime(ActionType selectedAction)
+    public void MoveSlime(ActionType selectedAction)
     {
         switch (selectedAction)
         {
@@ -117,5 +117,10 @@ public class GridMap
                 break;
 
         }
+    }
+
+    public System.Tuple<int,int> GetCurrentState()
+    {
+        return new System.Tuple<int, int>(currentPositionX, currentPositionY);
     }
 }

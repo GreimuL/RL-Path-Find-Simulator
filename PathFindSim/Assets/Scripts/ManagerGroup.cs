@@ -41,4 +41,14 @@ public class ManagerGroup : MonoBehaviour
         }
         return null;
     }
+
+    public GridUIManger stepMgr;
+    public static GridUIManger GetStepMgr()
+    {
+        if (Instance != null)
+        {
+            return Instance.stepMgr;
+        }
+        return null;
+    }
 }

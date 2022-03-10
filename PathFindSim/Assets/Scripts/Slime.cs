@@ -8,6 +8,7 @@ public class Slime : MonoBehaviour
     public enum ActionType { LEFT, UP, RIGHT, DOWN, CENTER = -1 };
 
     private float[,,] actionValueTable;
+    private float[,,] maxActionValueTable;
     public GridMapManager gridMapMgr;
     private GridMap gridMap;
     float eps;
@@ -40,7 +41,7 @@ public class Slime : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    ActionType ActionDecision(int currentPositionX, int currentPositionY)
+    public ActionType ActionDecision(int currentPositionX, int currentPositionY)
     {
         float randomValue = Random.value;
 
@@ -57,13 +58,30 @@ public class Slime : MonoBehaviour
         }
     }
 
-    void ActionTableUpdate(int currentPositionX, int currentPositionY, ActionType selectedAction, int nextPositionX, int nextPositionY)
+    public void ActionTableUpdate(int currentPositionX, int currentPositionY, ActionType selectedAction, int nextPositionX, int nextPositionY)
     {
         List<float> nextActionValueList = Enumerable.Range(0, actionNumber).Select(i => actionValueTable[nextPositionX, nextPositionY, i]).ToList();
         float maxActionValue = nextActionValueList.Max();
         float currentSelectedActionValue = actionValueTable[currentPositionX, currentPositionY, (int)selectedAction];
         actionValueTable[currentPositionX, currentPositionY, (int)selectedAction] += (reward + maxActionValue - currentSelectedActionValue) * alpha;
+
+        transform.position = new Vector3(nextPositionX * 5, 1, nextPositionY * 5);
     }
 
+    public ActionType FindMaxValueDirection(int currentPositionX,int currentPositionY)
+    {
+        float maxValue = -0x3f3f3f3f;
+        ActionType direction = 0;
+        for(int i = 0; i < actionNumber; i++)
+        {
+            float value = actionValueTable[currentPositionX, currentPositionY, i];
+            if (maxValue < value)
+            {
+                maxValue = value;
+                direction = (ActionType)i;
+            }
+        }
+        return direction;
+    }
 
 }

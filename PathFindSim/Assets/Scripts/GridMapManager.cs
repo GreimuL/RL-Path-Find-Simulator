@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ActionType = Slime.ActionType;
 
 public class GridMapManager : MonoBehaviour
 {
@@ -74,4 +75,21 @@ public class GridMapManager : MonoBehaviour
         gridMap.ToggleGridStat(x,y);
     }
 
+    public void UpdateGridValue(float[,] actionValueTable)
+    {
+        gridRenderer.UpdateGridValue(actionValueTable);
+    }
+    public void UpdateGridDirection(int i,int j, ActionType action)
+    {
+        gridRenderer.UpdateGridDirection(i, j, action);
+    }
+
+    public System.Tuple<int,int> GetCurrentState()
+    {
+        return gridMap.GetCurrentState();
+    }
+    public void MoveSlime(ActionType action)
+    {
+        gridMap.MoveSlime(action);
+    }
 }
