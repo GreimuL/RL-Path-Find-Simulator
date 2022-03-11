@@ -5,7 +5,7 @@ using System.Linq;
 
 public class Slime : MonoBehaviour
 {
-    public enum ActionType { LEFT, UP, RIGHT, DOWN, CENTER = -1 };
+    public enum ActionType { UP, LEFT, DOWN, RIGHT, CENTER = -1 };
 
     private float[,,] actionValueTable;
     private float[,,] maxActionValueTable;
@@ -47,6 +47,7 @@ public class Slime : MonoBehaviour
 
         if (randomValue < eps)
         {
+            Debug.Log("Random Action");
             return (ActionType)Random.Range(0, actionNumber);
         }
         else
@@ -65,6 +66,7 @@ public class Slime : MonoBehaviour
         float currentSelectedActionValue = actionValueTable[currentPositionX, currentPositionY, (int)selectedAction];
         actionValueTable[currentPositionX, currentPositionY, (int)selectedAction] += (reward + maxActionValue - currentSelectedActionValue) * alpha;
 
+        //Debug.Log(selectedAction);
         transform.position = new Vector3(nextPositionX * 5, 1, nextPositionY * 5);
     }
 
@@ -84,4 +86,12 @@ public class Slime : MonoBehaviour
         return direction;
     }
 
+    public void annealing()
+    {
+        eps = Mathf.Max(eps-0.03f,0.1f);        
+    }
+    public float GetEps()
+    {
+        return eps;
+    }
 }

@@ -91,26 +91,26 @@ public class GridMap
     {
         switch (selectedAction)
         {
-            case ActionType.LEFT:
-                if (currentPositionX - 1 >= 0)
+            case ActionType.UP:
+                if (currentPositionX - 1 >= 0&&gridStat[currentPositionX-1,currentPositionY]==true)
                 {
                     currentPositionX--;
                 }
                 break;
-            case ActionType.UP:
-                if (currentPositionY - 1 >= 0)
+            case ActionType.LEFT:
+                if (currentPositionY - 1 >= 0 && gridStat[currentPositionX, currentPositionY-1] == true)
                 {
                     currentPositionY--;
                 }
                 break;
-            case ActionType.RIGHT:
-                if (currentPositionX + 1 <sizeX)
+            case ActionType.DOWN:
+                if (currentPositionX + 1 <sizeX && gridStat[currentPositionX + 1, currentPositionY] == true)
                 {
                     currentPositionX++; ;
                 }
                 break;
-            case ActionType.DOWN:
-                if (currentPositionY + 1 < sizeY)
+            case ActionType.RIGHT:
+                if (currentPositionY + 1 < sizeY && gridStat[currentPositionX, currentPositionY+1] == true)
                 {
                     currentPositionY++;
                 }
@@ -122,5 +122,20 @@ public class GridMap
     public System.Tuple<int,int> GetCurrentState()
     {
         return new System.Tuple<int, int>(currentPositionX, currentPositionY);
+    }
+
+    public bool IsFinish()
+    {
+        if (currentPositionX == endPositionX && currentPositionY == endPositionY)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void ResetPosition()
+    {
+        currentPositionX = 0;
+        currentPositionY = 0;
     }
 }

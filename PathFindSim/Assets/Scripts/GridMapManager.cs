@@ -92,4 +92,12 @@ public class GridMapManager : MonoBehaviour
     {
         gridMap.MoveSlime(action);
     }
+    public bool IsFinish()
+    {
+        return gridMap.IsFinish();
+    }
+    public void ResetPosition()
+    {
+        gridMap.ResetPosition();
+    }
 }

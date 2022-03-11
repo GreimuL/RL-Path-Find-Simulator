@@ -20,7 +20,7 @@ public class StepManager : MonoBehaviour
         
     }
 
-    public void NextStep()
+    public bool NextStep()
     {
         System.Tuple<int, int> currentState = ManagerGroup.GetGridMapMgr().GetCurrentState();
         int currentX = currentState.Item1;
@@ -36,5 +36,36 @@ public class StepManager : MonoBehaviour
         slime.ActionTableUpdate(currentX, currentY, action, nextX, nextY);
         ActionType maxDirection = slime.FindMaxValueDirection(currentX, currentY);
         ManagerGroup.GetGridMapMgr().UpdateGridDirection(currentX,currentY,maxDirection);
+
+        Debug.Log(action);
+        Debug.Log(maxDirection);
+
+        if (ManagerGroup.GetGridMapMgr().IsFinish())
+        {
+            return false;
+        }
+        return true;
+    }
+    public void NextStepButton()
+    {
+        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
+        if (!NextStep())
+        {
+            ManagerGroup.GetGridMapMgr().ResetPosition();
+            slime.annealing();
+        }
+    }
+    public void PlayEpisode()
+    {
+        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
+        for (int i = 0; i < 1000; i++)
+        {
+            ManagerGroup.GetGridMapMgr().ResetPosition();
+            while (NextStep()) { }
+            slime.annealing();
+        }
+        ManagerGroup.GetGridMapMgr().ResetPosition();
+        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
+
     }
 }
