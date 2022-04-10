@@ -2,7 +2,8 @@
 Path Find Simulator using Reinforcement learning
 
 Q러닝을 사용한 길찾기 시뮬레이터 입니다.
-
+## 영상
+[![Trailer](https://img.youtube.com/vi/43Tv3OWXR9U/0.jpg)](https://youtu.be/43Tv3OWXR9U)
 ## 만든 이유  
 강화학습 공부를 하다가 Q러닝파트를 보는데,  
 에피소드가 끝나지 않았음에도, 각 스텝마다 판단하여 학습하는 Q러닝의 방법이 인상적이었습니다.  
