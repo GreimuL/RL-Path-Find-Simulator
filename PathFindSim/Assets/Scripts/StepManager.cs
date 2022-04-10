@@ -26,6 +26,10 @@ public class StepManager : MonoBehaviour
 
     public bool NextStep()
     {
+        if (ManagerGroup.GetGridMapMgr().IsFinish())
+        {
+            return false;
+        }
         System.Tuple<int, int> currentState = ManagerGroup.GetGridMapMgr().GetCurrentState();
         int currentX = currentState.Item1;
         int currentY = currentState.Item2;
@@ -44,10 +48,6 @@ public class StepManager : MonoBehaviour
         Debug.Log(action);
         Debug.Log(maxDirection);
 
-        if (ManagerGroup.GetGridMapMgr().IsFinish())
-        {
-            return false;
-        }
         return true;
     }
     public void NextStepButton()

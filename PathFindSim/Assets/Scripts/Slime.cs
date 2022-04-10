@@ -111,4 +111,9 @@ public class Slime : MonoBehaviour
         isSetEps = true;
         eps = value;
     }
+
+    public void ResetPosition()
+    {
+        transform.position = new Vector3(0, 1, 0);
+    }
 }

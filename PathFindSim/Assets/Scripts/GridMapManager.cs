@@ -100,6 +100,7 @@ public class GridMapManager : MonoBehaviour
     public void ResetPosition()
     {
         gridMap.ResetPosition();
+        slime.ResetPosition();
     }
     public void ResetAll()
     {
