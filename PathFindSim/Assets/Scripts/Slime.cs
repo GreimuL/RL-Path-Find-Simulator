@@ -15,18 +15,27 @@ public class Slime : MonoBehaviour
     int actionNumber;
     int reward;
     float alpha;
+    bool isSetEps;
 
     // Start is called before the first frame update
     void Start()
     {
+        /*
+        isSetEps = false;
         actionNumber = 4;
         reward = -1;
         alpha = 0.1f;
         eps = 0.9f;
+        */
     }
 
     public void ActionTableInit()
     {
+        isSetEps = false;
+        actionNumber = 4;
+        reward = -1;
+        alpha = 0.1f;
+        eps = 0.9f;
         gridMap = gridMapMgr.GetGridMap();
         actionValueTable = new float[gridMap.GetSize().Item1, gridMap.GetSize().Item2, actionNumber];
     }
@@ -88,10 +97,18 @@ public class Slime : MonoBehaviour
 
     public void annealing()
     {
-        eps = Mathf.Max(eps-0.03f,0.1f);        
+        if (!isSetEps)
+        {
+            eps = Mathf.Max(eps - 0.03f, 0.1f);
+        }
     }
     public float GetEps()
     {
         return eps;
+    }
+    public void SetEps(float value)
+    {
+        isSetEps = true;
+        eps = value;
     }
 }

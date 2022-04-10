@@ -17,6 +17,7 @@ public class GridMapManager : MonoBehaviour
     public GameObject gridInstance;
     public TMP_InputField gridSizeXText;
     public TMP_InputField gridSizeYText;
+    public TMP_InputField epsInputField;
     public Slime slime;
 
     public GridRenderer gridRenderer;
@@ -107,5 +108,15 @@ public class GridMapManager : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+    }
+    public void SetEps()
+    {
+        float eps;
+        if(!float.TryParse(epsInputField.text, out eps))
+        {
+            eps = 0;
+        }
+        slime.SetEps(eps);
+        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
     }
 }

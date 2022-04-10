@@ -82,6 +82,7 @@ public class StepManager : MonoBehaviour
             while (NextStep()) { }
             slime.annealing();
             ManagerGroup.GetGridUIMgr().SetProgressText(i + 1, episodeCount);
+            ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
             yield return null;
         }
         ManagerGroup.GetGridUIMgr().DeActivatePausePanel();
