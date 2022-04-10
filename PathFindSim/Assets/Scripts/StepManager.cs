@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using ActionType = Slime.ActionType;
 
 public class StepManager : MonoBehaviour
 {
 
     public Slime slime;
+    public TMP_InputField episodeCountInput;
+    int defaultEpisodeCount = 1000;
+    int episodeCount;
 
     // Start is called before the first frame update
     void Start()
@@ -57,15 +61,29 @@ public class StepManager : MonoBehaviour
     }
     public void PlayEpisode()
     {
+        ManagerGroup.GetGridUIMgr().ActivatePausePanel();
+        if (!int.TryParse(episodeCountInput.text, out episodeCount))
+        {
+            episodeCount = defaultEpisodeCount;
+        }
         ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
-        for (int i = 0; i < 1000; i++)
+        StartCoroutine("StartEpisodeCoroutine");
+        ManagerGroup.GetGridMapMgr().ResetPosition();
+        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
+
+    }
+
+    IEnumerator StartEpisodeCoroutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < episodeCount; i++)
         {
             ManagerGroup.GetGridMapMgr().ResetPosition();
             while (NextStep()) { }
             slime.annealing();
+            ManagerGroup.GetGridUIMgr().SetProgressText(i + 1, episodeCount);
+            yield return null;
         }
-        ManagerGroup.GetGridMapMgr().ResetPosition();
-        ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
-
+        ManagerGroup.GetGridUIMgr().DeActivatePausePanel();
     }
 }

@@ -10,6 +10,8 @@ public class GridUIManger : MonoBehaviour
     public GridLayoutGroup gridContainer;
     public Slider GridUISizeSlider;
     public TMP_Text epsText;
+    public TMP_Text progressText;
+    public GameObject pausePanel;
 
     // Start is called before the first frame update
     void Start()
@@ -36,4 +38,22 @@ public class GridUIManger : MonoBehaviour
     {
         epsText.text = "EPS: " + string.Format("{0:0.00}", value);
     }
+
+    public void OnClickResetButton()
+    {
+        ManagerGroup.GetGridMapMgr().ResetAll();
+    }
+    public void ActivatePausePanel()
+    {
+        pausePanel.SetActive(true);
+    }
+    public void DeActivatePausePanel()
+    {
+        pausePanel.SetActive(false);
+    }
+    public void SetProgressText(int progressCount,int maxCount)
+    {
+        progressText.text = progressCount + " / " + maxCount;
+    }
+
 }

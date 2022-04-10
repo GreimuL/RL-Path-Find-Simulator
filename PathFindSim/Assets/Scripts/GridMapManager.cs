@@ -100,4 +100,12 @@ public class GridMapManager : MonoBehaviour
     {
         gridMap.ResetPosition();
     }
+    public void ResetAll()
+    {
+        ResetPosition();
+        foreach(Transform child in gridContainer.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
 }
