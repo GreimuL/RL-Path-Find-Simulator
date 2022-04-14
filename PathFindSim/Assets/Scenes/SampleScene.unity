@@ -844,7 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridMapMgr: {fileID: 239860627}
   gridUIMgr: {fileID: 239860628}
-  stepMgr: {fileID: 0}
+  stepMgr: {fileID: 239860631}
 --- !u!4 &239860630
 Transform:
   m_ObjectHideFlags: 0
