@@ -93,7 +93,7 @@ public class Slime : MonoBehaviour
         return direction;
     }
 
-    public void annealing()
+    public void Annealing()
     {
         if (!isSetEps)
         {

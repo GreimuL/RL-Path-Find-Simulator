@@ -56,7 +56,7 @@ public class StepManager : MonoBehaviour
         if (!NextStep())
         {
             ManagerGroup.GetGridMapMgr().ResetPosition();
-            slime.annealing();
+            slime.Annealing();
         }
     }
     public void PlayEpisode()
@@ -80,7 +80,7 @@ public class StepManager : MonoBehaviour
         {
             ManagerGroup.GetGridMapMgr().ResetPosition();
             while (NextStep()) { }
-            slime.annealing();
+            slime.Annealing();
             ManagerGroup.GetGridUIMgr().SetProgressText(i + 1, episodeCount);
             ManagerGroup.GetGridUIMgr().SetEpsText(slime.GetEps());
             yield return null;
