@@ -38,11 +38,6 @@ public class GridUIManger : MonoBehaviour
     {
         epsText.text = "EPS: " + string.Format("{0:0.00}", value);
     }
-
-    public void OnClickResetButton()
-    {
-        ManagerGroup.GetGridMapMgr().ResetAll();
-    }
     public void ActivatePausePanel()
     {
         pausePanel.SetActive(true);
