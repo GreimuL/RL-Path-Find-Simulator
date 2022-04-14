@@ -891,7 +891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a38e39e074fb4469d8c030e88769db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridMapMgr: {fileID: 239860627}
 --- !u!1 &300782038
 GameObject:
   m_ObjectHideFlags: 0
@@ -4129,9 +4128,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 239860628}
-        m_TargetAssemblyTypeName: GridUIManger, Assembly-CSharp
-        m_MethodName: OnClickResetButton
+      - m_Target: {fileID: 239860627}
+        m_TargetAssemblyTypeName: GridMapManager, Assembly-CSharp
+        m_MethodName: ResetAll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
