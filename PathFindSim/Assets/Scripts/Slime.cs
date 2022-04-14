@@ -8,8 +8,6 @@ public class Slime : MonoBehaviour
     public enum ActionType { UP, LEFT, DOWN, RIGHT, CENTER = -1 };
 
     private float[,,] actionValueTable;
-    private float[,,] maxActionValueTable;
-    public GridMapManager gridMapMgr;
     private GridMap gridMap;
     float eps;
     int actionNumber;
@@ -36,7 +34,7 @@ public class Slime : MonoBehaviour
         reward = -1;
         alpha = 0.1f;
         eps = 0.9f;
-        gridMap = gridMapMgr.GetGridMap();
+        gridMap = ManagerGroup.GetGridMapMgr().GetGridMap();
         actionValueTable = new float[gridMap.GetSize().Item1, gridMap.GetSize().Item2, actionNumber];
     }
 
